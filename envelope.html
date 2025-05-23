@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ซองจดหมายสวยๆ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f9f9f9, #d1e7f9);
+    font-family: 'Kanit', sans-serif;
+  }
+
+  .envelope-container {
+    perspective: 1200px;
+  }
+
+  .envelope {
+    width: 350px;
+    height: 220px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .envelope.open {
+    transform: rotateX(45deg) rotateY(10deg);
+  }
+
+  .envelope-base {
+    width: 100%;
+    height: 140px;
+    background: #e74c3c;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .envelope-flap {
+    width: 0;
+    height: 0;
+    border-left: 175px solid transparent;
+    border-right: 175px solid transparent;
+    border-bottom: 110px solid #c0392b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px 20px 0 0;
+    transform-origin: bottom center;
+    box-shadow: inset 0 -10px 15px rgba(0,0,0,0.1);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+  }
+
+  .envelope.open .envelope-flap {
+    transform: rotateX(-180deg);
+    box-shadow: none;
+  }
+
+  .message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: 80%;
+    max-width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    color: #222;
+    font-size: 18px;
+    line-height: 1.6;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    opacity: 0;
+    pointer-events: none;
+    text-align: center;
+    transition: opacity 0.5s ease 0.6s, transform 0.6s ease 0.6s;
+    user-select: text;
+    z-index: 3;
+  }
+
+  .envelope.open .message {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  .envelope-base::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 20px;
+    background: rgba(0,0,0,0.15);
+    filter: blur(6px);
+    border-radius: 50%;
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+  <div class="envelope-container">
+    <div class="envelope" onclick="this.classList.toggle('open')" title="คลิกเพื่อเปิด/ปิดซองจดหมาย">
+      <div class="envelope-flap"></div>
+      <div class="envelope-base"></div>
+      <div class="message"> รักจ๋ามากๆเลยนะคะะที่ัรัก </div>
+    </div>
+  </div>
+</body>
+</html>
